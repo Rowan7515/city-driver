@@ -291,16 +291,19 @@ function SetColour () {
     Red.setFlag(SpriteFlag.Invisible, true)
     Blue.setFlag(SpriteFlag.Invisible, true)
     Car.setFlag(SpriteFlag.Invisible, false)
+    gameRunning = 1
 }
 function setVariables () {
     gameRunning = 0
     colourChosen = 0
+    boostCharge = 100
 }
+let boostCharge = 0
+let gameRunning = 0
 let colourChosen = 0
 let Blue: Sprite = null
 let Purple: Sprite = null
 let Red: Sprite = null
-let gameRunning = 0
 let Car: Sprite = null
 let Cursor: Sprite = null
 setVariables()
@@ -311,9 +314,19 @@ tiles.setTilemap(tilemap`level1`)
 tiles.placeOnRandomTile(Car, assets.tile`Start`)
 Car.setStayInScreen(true)
 scene.cameraFollowSprite(Car)
-gameRunning = 1
 forever(function () {
     if (gameRunning == 1) {
         Car.x += 2
+        if (controller.A.isPressed() && boostCharge > 0) {
+            Car.x += 1.5
+            boostCharge += -1.5
+        }
     }
+    if (boostCharge < 100) {
+        boostCharge += 0.1
+    }
+    if (boostCharge >= 100) {
+        boostCharge = 100
+    }
+    boostCharge = Math.round(boostCharge * 10) / 10
 })
