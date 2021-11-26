@@ -124,7 +124,7 @@ function SetColour () {
         ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
         ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
         `)
-    Red = sprites.create(img`
+    Sprite_Red = sprites.create(img`
         2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
         2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
         2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
@@ -142,8 +142,8 @@ function SetColour () {
         2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
         2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
         `, SpriteKind.Player)
-    Red.setPosition(30, 60)
-    Purple = sprites.create(img`
+    Sprite_Red.setPosition(30, 60)
+    Sprite_Purple = sprites.create(img`
         3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
         3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
         3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
@@ -161,8 +161,8 @@ function SetColour () {
         3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
         3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
         `, SpriteKind.Object)
-    Purple.setPosition(80, 60)
-    Blue = sprites.create(img`
+    Sprite_Purple.setPosition(80, 60)
+    Sprite_Blue = sprites.create(img`
         8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 
         8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 
         8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 
@@ -180,8 +180,8 @@ function SetColour () {
         8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 
         8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 
         `, SpriteKind.Object)
-    Blue.setPosition(130, 60)
-    Cursor = sprites.create(img`
+    Sprite_Blue.setPosition(130, 60)
+    Sprite_Cursor = sprites.create(img`
         . . . . . . . . . . . . . . . . 
         . . . . . . . . . . . . . . . . 
         . . . . . . . . . . . . . . . . 
@@ -199,9 +199,9 @@ function SetColour () {
         . . . . . . . . . . . . . . . . 
         . . . . . . . . . . . . . . . . 
         `, SpriteKind.Object)
-    Cursor.setPosition(80, 80)
-    controller.moveSprite(Cursor)
-    Car = sprites.create(img`
+    Sprite_Cursor.setPosition(80, 80)
+    controller.moveSprite(Sprite_Cursor)
+    Sprite_Car = sprites.create(img`
         . . . . . . . . . . . . . . . . 
         . . . . 2 2 2 2 2 2 2 2 . . . . 
         . . . 2 4 2 2 2 2 2 2 c 2 . . . 
@@ -219,12 +219,19 @@ function SetColour () {
         . . . f f f . . . . f f f f . . 
         . . . . . . . . . . . . . . . . 
         `, SpriteKind.Player)
-    Car.setFlag(SpriteFlag.Invisible, true)
-    Cursor.setPosition(80, 80)
+    Sprite_boost_charge_bar = sprites.create(img`
+        . b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b . 
+        b 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 b 
+        b 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 b 
+        . b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b . 
+        `, SpriteKind.Object)
+    Sprite_Car.setFlag(SpriteFlag.Invisible, true)
+    Sprite_boost_charge_bar.setFlag(SpriteFlag.Invisible, true)
+    Sprite_Cursor.setPosition(80, 80)
     while (colourChosen == 0) {
-        if (controller.A.isPressed() && Cursor.overlapsWith(Purple)) {
+        if (controller.A.isPressed() && Sprite_Cursor.overlapsWith(Sprite_Purple)) {
             colourChosen = 1
-            Car.setImage(img`
+            Sprite_Car.setImage(img`
                 . . . . . . . . . . . . . . . . 
                 . . . . 3 3 3 3 3 3 3 3 . . . . 
                 . . . 3 d 3 3 3 3 3 3 c 3 . . . 
@@ -242,9 +249,9 @@ function SetColour () {
                 . . . f f f . . . . f f f f . . 
                 . . . . . . . . . . . . . . . . 
                 `)
-        } else if (controller.A.isPressed() && Cursor.overlapsWith(Red)) {
+        } else if (controller.A.isPressed() && Sprite_Cursor.overlapsWith(Sprite_Red)) {
             colourChosen = 1
-            Car.setImage(img`
+            Sprite_Car.setImage(img`
                 . . . . . . . . . . . . . . . . 
                 . . . . 2 2 2 2 2 2 2 2 . . . . 
                 . . . 2 4 2 2 2 2 2 2 c 2 . . . 
@@ -262,9 +269,9 @@ function SetColour () {
                 . . . f f f . . . . f f f f . . 
                 . . . . . . . . . . . . . . . . 
                 `)
-        } else if (controller.A.isPressed() && Cursor.overlapsWith(Blue)) {
+        } else if (controller.A.isPressed() && Sprite_Cursor.overlapsWith(Sprite_Blue)) {
             colourChosen = 1
-            Car.setImage(img`
+            Sprite_Car.setImage(img`
                 . . . . . . . . . . . . . . . . 
                 . . . . 6 6 6 6 6 6 6 6 . . . . 
                 . . . 6 9 6 6 6 6 6 6 c 6 . . . 
@@ -286,11 +293,12 @@ function SetColour () {
             pause(10)
         }
     }
-    Cursor.setFlag(SpriteFlag.Invisible, true)
-    Purple.setFlag(SpriteFlag.Invisible, true)
-    Red.setFlag(SpriteFlag.Invisible, true)
-    Blue.setFlag(SpriteFlag.Invisible, true)
-    Car.setFlag(SpriteFlag.Invisible, false)
+    Sprite_Cursor.setFlag(SpriteFlag.Invisible, true)
+    Sprite_Purple.setFlag(SpriteFlag.Invisible, true)
+    Sprite_Red.setFlag(SpriteFlag.Invisible, true)
+    Sprite_Blue.setFlag(SpriteFlag.Invisible, true)
+    Sprite_Car.setFlag(SpriteFlag.Invisible, false)
+    Sprite_boost_charge_bar.setFlag(SpriteFlag.Invisible, false)
     gameRunning = 1
 }
 function setVariables () {
@@ -298,27 +306,131 @@ function setVariables () {
     colourChosen = 0
     boostCharge = 100
 }
+function updateBoostBar (num: number) {
+    if (num == 50) {
+        Sprite_boost_charge_bar.setImage(img`
+            . b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b . 
+            b 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 b 
+            b 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 b 
+            . b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b . 
+            `)
+    } else if (num == 49) {
+        Sprite_boost_charge_bar.setImage(img`
+            . b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b . 
+            b 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 d b 
+            b 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 d b 
+            . b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b . 
+            `)
+    } else if (num == 48) {
+        Sprite_boost_charge_bar.setImage(img`
+            . b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b . 
+            b 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 d d b 
+            b 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 d d b 
+            . b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b . 
+            `)
+    } else if (num == 47) {
+        Sprite_boost_charge_bar.setImage(img`
+            . b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b . 
+            b 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 d d d b 
+            b 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 d d d b 
+            . b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b . 
+            `)
+    } else if (num == 46) {
+        Sprite_boost_charge_bar.setImage(img`
+            . b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b . 
+            b 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 d d d d b 
+            b 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 d d d d b 
+            . b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b . 
+            `)
+    } else if (num == 45) {
+        Sprite_boost_charge_bar.setImage(img`
+            . b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b . 
+            b 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 d d d d d b 
+            b 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 d d d d d b 
+            . b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b . 
+            `)
+    } else if (num == 44) {
+        Sprite_boost_charge_bar.setImage(img`
+            . b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b . 
+            b 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 d d d d d d b 
+            b 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 d d d d d d b 
+            . b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b . 
+            `)
+    } else if (num == 43) {
+        Sprite_boost_charge_bar.setImage(img`
+            . b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b . 
+            b 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 d d d d d d d b 
+            b 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 d d d d d d d b 
+            . b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b . 
+            `)
+    } else if (num == 42) {
+        Sprite_boost_charge_bar.setImage(img`
+            . b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b . 
+            b 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 d d d d d d d d b 
+            b 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 d d d d d d d d b 
+            . b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b . 
+            `)
+    } else if (num == 41) {
+        Sprite_boost_charge_bar.setImage(img`
+            . b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b . 
+            b 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 d d d d d d d d d b 
+            b 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 d d d d d d d d d b 
+            . b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b . 
+            `)
+    } else if (num == 40) {
+        Sprite_boost_charge_bar.setImage(img`
+            . b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b . 
+            b 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 d d d d d d d d d d d b 
+            b 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 d d d d d d d d d d d b 
+            . b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b . 
+            `)
+    } else if (num == 39) {
+        Sprite_boost_charge_bar.setImage(img`
+            . b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b . 
+            b 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 d d d d d d d d d d d d b 
+            b 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 d d d d d d d d d d d d b 
+            . b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b . 
+            `)
+    } else if (num == 38) {
+        Sprite_boost_charge_bar.setImage(img`
+            . b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b . 
+            b 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 d d d d d d d d d d d d d b 
+            b 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 d d d d d d d d d d d d d b 
+            . b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b . 
+            `)
+    } else if (num == 37) {
+        Sprite_boost_charge_bar.setImage(img`
+            . b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b . 
+            b 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 d d d d d d d d d d d d d d b 
+            b 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 d d d d d d d d d d d d d d b 
+            . b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b . 
+            `)
+    } else {
+    	
+    }
+}
 let boostCharge = 0
 let gameRunning = 0
 let colourChosen = 0
-let Blue: Sprite = null
-let Purple: Sprite = null
-let Red: Sprite = null
-let Car: Sprite = null
-let Cursor: Sprite = null
+let Sprite_boost_charge_bar: Sprite = null
+let Sprite_Blue: Sprite = null
+let Sprite_Purple: Sprite = null
+let Sprite_Red: Sprite = null
+let Sprite_Car: Sprite = null
+let Sprite_Cursor: Sprite = null
 setVariables()
 SetColour()
-controller.moveSprite(Cursor, 0, 0)
-controller.moveSprite(Car, 0, 100)
+controller.moveSprite(Sprite_Cursor, 0, 0)
+controller.moveSprite(Sprite_Car, 0, 100)
 tiles.setTilemap(tilemap`level1`)
-tiles.placeOnRandomTile(Car, assets.tile`Start`)
-Car.setStayInScreen(true)
-scene.cameraFollowSprite(Car)
+tiles.placeOnRandomTile(Sprite_Car, assets.tile`Start`)
+Sprite_Car.setStayInScreen(true)
+scene.cameraFollowSprite(Sprite_Car)
 forever(function () {
     if (gameRunning == 1) {
-        Car.x += 2
+        Sprite_Car.x += 2
         if (controller.A.isPressed() && boostCharge > 0) {
-            Car.x += 1.5
+            Sprite_Car.x += 1.5
             boostCharge += -1.5
         }
     }
@@ -329,4 +441,6 @@ forever(function () {
         boostCharge = 100
     }
     boostCharge = Math.round(boostCharge * 10) / 10
+    updateBoostBar(Math.round(boostCharge / 2))
+    Sprite_boost_charge_bar.setPosition(Sprite_Car.x - 50, Sprite_Car.y + 50)
 })
