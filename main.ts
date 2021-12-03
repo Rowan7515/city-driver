@@ -124,7 +124,7 @@ function SetColour () {
         ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
         ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
         `)
-    Sprite_Red = sprites.create(img`
+    zSprite_Red = sprites.create(img`
         2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
         2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
         2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
@@ -142,8 +142,8 @@ function SetColour () {
         2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
         2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
         `, SpriteKind.Player)
-    Sprite_Red.setPosition(30, 60)
-    Sprite_Purple = sprites.create(img`
+    zSprite_Red.setPosition(30, 60)
+    zSprite_Purple = sprites.create(img`
         3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
         3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
         3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
@@ -161,8 +161,8 @@ function SetColour () {
         3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
         3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
         `, SpriteKind.Object)
-    Sprite_Purple.setPosition(80, 60)
-    Sprite_Blue = sprites.create(img`
+    zSprite_Purple.setPosition(80, 60)
+    zSprite_Blue = sprites.create(img`
         8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 
         8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 
         8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 
@@ -180,8 +180,8 @@ function SetColour () {
         8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 
         8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 
         `, SpriteKind.Object)
-    Sprite_Blue.setPosition(130, 60)
-    Sprite_Cursor = sprites.create(img`
+    zSprite_Blue.setPosition(130, 60)
+    zSprite_Cursor = sprites.create(img`
         . . . . . . . . . . . . . . . . 
         . . . . . . . . . . . . . . . . 
         . . . . . . . . . . . . . . . . 
@@ -199,9 +199,9 @@ function SetColour () {
         . . . . . . . . . . . . . . . . 
         . . . . . . . . . . . . . . . . 
         `, SpriteKind.Object)
-    Sprite_Cursor.setPosition(80, 80)
-    controller.moveSprite(Sprite_Cursor)
-    Sprite_Car = sprites.create(img`
+    zSprite_Cursor.setPosition(80, 80)
+    controller.moveSprite(zSprite_Cursor)
+    zSprite_Car = sprites.create(img`
         . . . . . . . . . . . . . . . . 
         . . . . 2 2 2 2 2 2 2 2 . . . . 
         . . . 2 4 2 2 2 2 2 2 c 2 . . . 
@@ -219,19 +219,19 @@ function SetColour () {
         . . . f f f . . . . f f f f . . 
         . . . . . . . . . . . . . . . . 
         `, SpriteKind.Player)
-    Sprite_boost_charge_bar = sprites.create(img`
+    zSprite_boost_charge_bar = sprites.create(img`
         . b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b . 
         b 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 b 
         b 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 b 
         . b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b . 
         `, SpriteKind.Object)
-    Sprite_Car.setFlag(SpriteFlag.Invisible, true)
-    Sprite_boost_charge_bar.setFlag(SpriteFlag.Invisible, true)
-    Sprite_Cursor.setPosition(80, 80)
+    zSprite_Car.setFlag(SpriteFlag.Invisible, true)
+    zSprite_boost_charge_bar.setFlag(SpriteFlag.Invisible, true)
+    zSprite_Cursor.setPosition(80, 80)
     while (colourChosen == 0) {
-        if (controller.A.isPressed() && Sprite_Cursor.overlapsWith(Sprite_Purple)) {
+        if (controller.A.isPressed() && zSprite_Cursor.overlapsWith(zSprite_Purple)) {
             colourChosen = 1
-            Sprite_Car.setImage(img`
+            zSprite_Car.setImage(img`
                 . . . . . . . . . . . . . . . . 
                 . . . . 3 3 3 3 3 3 3 3 . . . . 
                 . . . 3 d 3 3 3 3 3 3 c 3 . . . 
@@ -249,9 +249,9 @@ function SetColour () {
                 . . . f f f . . . . f f f f . . 
                 . . . . . . . . . . . . . . . . 
                 `)
-        } else if (controller.A.isPressed() && Sprite_Cursor.overlapsWith(Sprite_Red)) {
+        } else if (controller.A.isPressed() && zSprite_Cursor.overlapsWith(zSprite_Red)) {
             colourChosen = 1
-            Sprite_Car.setImage(img`
+            zSprite_Car.setImage(img`
                 . . . . . . . . . . . . . . . . 
                 . . . . 2 2 2 2 2 2 2 2 . . . . 
                 . . . 2 4 2 2 2 2 2 2 c 2 . . . 
@@ -269,9 +269,9 @@ function SetColour () {
                 . . . f f f . . . . f f f f . . 
                 . . . . . . . . . . . . . . . . 
                 `)
-        } else if (controller.A.isPressed() && Sprite_Cursor.overlapsWith(Sprite_Blue)) {
+        } else if (controller.A.isPressed() && zSprite_Cursor.overlapsWith(zSprite_Blue)) {
             colourChosen = 1
-            Sprite_Car.setImage(img`
+            zSprite_Car.setImage(img`
                 . . . . . . . . . . . . . . . . 
                 . . . . 6 6 6 6 6 6 6 6 . . . . 
                 . . . 6 9 6 6 6 6 6 6 c 6 . . . 
@@ -293,154 +293,336 @@ function SetColour () {
             pause(10)
         }
     }
-    Sprite_Cursor.setFlag(SpriteFlag.Invisible, true)
-    Sprite_Purple.setFlag(SpriteFlag.Invisible, true)
-    Sprite_Red.setFlag(SpriteFlag.Invisible, true)
-    Sprite_Blue.setFlag(SpriteFlag.Invisible, true)
-    Sprite_Car.setFlag(SpriteFlag.Invisible, false)
-    Sprite_boost_charge_bar.setFlag(SpriteFlag.Invisible, false)
+    zSprite_Cursor.setFlag(SpriteFlag.Invisible, true)
+    zSprite_Purple.setFlag(SpriteFlag.Invisible, true)
+    zSprite_Red.setFlag(SpriteFlag.Invisible, true)
+    zSprite_Blue.setFlag(SpriteFlag.Invisible, true)
+    pause(1000)
+    zSprite_3 = sprites.create(img`
+        . . . . . . . . . . . . . . . . 
+        . . . 2 2 2 2 2 2 2 2 2 . . . . 
+        . . 2 a a a a a a a a a 2 . . . 
+        . . . 2 a a a a a a a a 2 . . . 
+        . . . . 2 2 2 2 2 2 a a 2 . . . 
+        . . . . . . . . . 2 a a 2 . . . 
+        . . . . . . . 2 2 2 a a 2 . . . 
+        . . . . . . 2 a a a a a 2 . . . 
+        . . . . . 2 a a a a a a 2 . . . 
+        . . . . . . 2 a a a a a 2 . . . 
+        . . . . . . . 2 2 2 a a 2 . . . 
+        . . . . . . . . . 2 a a 2 . . . 
+        . . . . 2 2 2 2 2 2 a a 2 . . . 
+        . . . 2 a a a a a a a a 2 . . . 
+        . . 2 a a a a a a a a a 2 . . . 
+        . . . 2 2 2 2 2 2 2 2 2 . . . . 
+        `, SpriteKind.Player)
+    zSprite_3.setPosition(80, 60)
+    pause(1000)
+    zSprite_3.setFlag(SpriteFlag.Invisible, true)
+    zSprite_2 = sprites.create(img`
+        . . . . . . . . . . . . . . . . 
+        . . . 2 2 2 2 2 2 2 . . . . . . 
+        . . 2 a a a a a a a 2 . . . . . 
+        . . 2 a a a a a a a a 2 . . . . 
+        . . . 2 2 2 2 2 2 a a a 2 . . . 
+        . . . . . . . . . 2 a a 2 . . . 
+        . . . . . . . . 2 a a a 2 . . . 
+        . . . . . . . 2 a a a a 2 . . . 
+        . . . . . . 2 a a a a 2 . . . . 
+        . . . . . 2 a a a a 2 . . . . . 
+        . . . . 2 a a a a 2 . . . . . . 
+        . . . 2 a a a a 2 . . . . . . . 
+        . . 2 a a a a 2 2 2 2 2 . . . . 
+        . . 2 a a a a a a a a a 2 . . . 
+        . . 2 a a a a a a a a a 2 . . . 
+        . . . 2 2 2 2 2 2 2 2 2 . . . . 
+        `, SpriteKind.Player)
+    zSprite_2.setPosition(80, 60)
+    pause(1000)
+    zSprite_2.setFlag(SpriteFlag.Invisible, true)
+    zSprite_2 = sprites.create(img`
+        . . . . . . . . . . . . . . . . 
+        . . . 2 2 2 2 2 2 2 . . . . . . 
+        . . 2 a a a a a a a 2 . . . . . 
+        . . 2 a a a a a a a a 2 . . . . 
+        . . . 2 2 2 2 2 2 a a a 2 . . . 
+        . . . . . . . . . 2 a a 2 . . . 
+        . . . . . . . . 2 a a a 2 . . . 
+        . . . . . . . 2 a a a a 2 . . . 
+        . . . . . . 2 a a a a 2 . . . . 
+        . . . . . 2 a a a a 2 . . . . . 
+        . . . . 2 a a a a 2 . . . . . . 
+        . . . 2 a a a a 2 . . . . . . . 
+        . . 2 a a a a 2 2 2 2 2 . . . . 
+        . . 2 a a a a a a a a a 2 . . . 
+        . . 2 a a a a a a a a a 2 . . . 
+        . . . 2 2 2 2 2 2 2 2 2 . . . . 
+        `, SpriteKind.Player)
+    zSprite_3 = sprites.create(img`
+        . . . . . . . . . . . . . . . . 
+        . . . 2 2 2 2 2 2 2 2 2 . . . . 
+        . . 2 a a a a a a a a a 2 . . . 
+        . . . 2 a a a a a a a a 2 . . . 
+        . . . . 2 2 2 2 2 2 a a 2 . . . 
+        . . . . . . . . . 2 a a 2 . . . 
+        . . . . . . . 2 2 2 a a 2 . . . 
+        . . . . . . 2 a a a a a 2 . . . 
+        . . . . . 2 a a a a a a 2 . . . 
+        . . . . . . 2 a a a a a 2 . . . 
+        . . . . . . . 2 2 2 a a 2 . . . 
+        . . . . . . . . . 2 a a 2 . . . 
+        . . . . 2 2 2 2 2 2 a a 2 . . . 
+        . . . 2 a a a a a a a a 2 . . . 
+        . . 2 a a a a a a a a a 2 . . . 
+        . . . 2 2 2 2 2 2 2 2 2 . . . . 
+        `, SpriteKind.Player)
     gameRunning = 1
+    zSprite_Car.setFlag(SpriteFlag.Invisible, false)
+    zSprite_boost_charge_bar.setFlag(SpriteFlag.Invisible, false)
 }
 function setVariables () {
     gameRunning = 0
     colourChosen = 0
     boostCharge = 100
+    speed = 0
+    maxSpeed = 3
 }
 function updateBoostBar (num: number) {
     if (num == 50) {
-        Sprite_boost_charge_bar.setImage(img`
+        zSprite_boost_charge_bar.setImage(img`
             . b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b . 
             b 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 b 
             b 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 b 
             . b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b . 
             `)
     } else if (num == 49) {
-        Sprite_boost_charge_bar.setImage(img`
+        zSprite_boost_charge_bar.setImage(img`
             . b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b . 
             b 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 d b 
             b 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 d b 
             . b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b . 
             `)
     } else if (num == 48) {
-        Sprite_boost_charge_bar.setImage(img`
+        zSprite_boost_charge_bar.setImage(img`
             . b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b . 
             b 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 d d b 
             b 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 d d b 
             . b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b . 
             `)
     } else if (num == 47) {
-        Sprite_boost_charge_bar.setImage(img`
+        zSprite_boost_charge_bar.setImage(img`
             . b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b . 
             b 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 d d d b 
             b 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 d d d b 
             . b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b . 
             `)
     } else if (num == 46) {
-        Sprite_boost_charge_bar.setImage(img`
+        zSprite_boost_charge_bar.setImage(img`
             . b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b . 
             b 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 d d d d b 
             b 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 d d d d b 
             . b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b . 
             `)
     } else if (num == 45) {
-        Sprite_boost_charge_bar.setImage(img`
+        zSprite_boost_charge_bar.setImage(img`
             . b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b . 
             b 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 d d d d d b 
             b 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 d d d d d b 
             . b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b . 
             `)
     } else if (num == 44) {
-        Sprite_boost_charge_bar.setImage(img`
+        zSprite_boost_charge_bar.setImage(img`
             . b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b . 
             b 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 d d d d d d b 
             b 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 d d d d d d b 
             . b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b . 
             `)
     } else if (num == 43) {
-        Sprite_boost_charge_bar.setImage(img`
+        zSprite_boost_charge_bar.setImage(img`
             . b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b . 
             b 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 d d d d d d d b 
             b 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 d d d d d d d b 
             . b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b . 
             `)
     } else if (num == 42) {
-        Sprite_boost_charge_bar.setImage(img`
+        zSprite_boost_charge_bar.setImage(img`
             . b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b . 
             b 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 d d d d d d d d b 
             b 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 d d d d d d d d b 
             . b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b . 
             `)
     } else if (num == 41) {
-        Sprite_boost_charge_bar.setImage(img`
+        zSprite_boost_charge_bar.setImage(img`
             . b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b . 
             b 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 d d d d d d d d d b 
             b 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 d d d d d d d d d b 
             . b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b . 
             `)
     } else if (num == 40) {
-        Sprite_boost_charge_bar.setImage(img`
+        zSprite_boost_charge_bar.setImage(img`
             . b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b . 
             b 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 d d d d d d d d d d d b 
             b 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 d d d d d d d d d d d b 
             . b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b . 
             `)
     } else if (num == 39) {
-        Sprite_boost_charge_bar.setImage(img`
+        zSprite_boost_charge_bar.setImage(img`
             . b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b . 
             b 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 d d d d d d d d d d d d b 
             b 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 d d d d d d d d d d d d b 
             . b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b . 
             `)
     } else if (num == 38) {
-        Sprite_boost_charge_bar.setImage(img`
+        zSprite_boost_charge_bar.setImage(img`
             . b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b . 
             b 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 d d d d d d d d d d d d d b 
             b 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 d d d d d d d d d d d d d b 
             . b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b . 
             `)
     } else if (num == 37) {
-        Sprite_boost_charge_bar.setImage(img`
+        zSprite_boost_charge_bar.setImage(img`
             . b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b . 
             b 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 d d d d d d d d d d d d d d b 
             b 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 d d d d d d d d d d d d d d b 
+            . b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b . 
+            `)
+    } else if (num == 36) {
+        zSprite_boost_charge_bar.setImage(img`
+            . b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b . 
+            b 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 d d d d d d d d d d d d d d d b 
+            b 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 d d d d d d d d d d d d d d d b 
+            . b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b . 
+            `)
+    } else if (num == 35) {
+        zSprite_boost_charge_bar.setImage(img`
+            . b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b . 
+            b 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 d d d d d d d d d d d d d d d d b 
+            b 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 d d d d d d d d d d d d d d d d b 
+            . b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b . 
+            `)
+    } else if (num == 34) {
+        zSprite_boost_charge_bar.setImage(img`
+            . b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b . 
+            b 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 d d d d d d d d d d d d d d d d d b 
+            b 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 d d d d d d d d d d d d d d d d d b 
+            . b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b . 
+            `)
+    } else if (num == 33) {
+        zSprite_boost_charge_bar.setImage(img`
+            . b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b . 
+            b 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 d d d d d d d d d d d d d d d d d d b 
+            b 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 d d d d d d d d d d d d d d d d d d b 
+            . b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b . 
+            `)
+    } else if (num == 32) {
+        zSprite_boost_charge_bar.setImage(img`
+            . b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b . 
+            b 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 d d d d d d d d d d d d d d d d d d d b 
+            b 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 d d d d d d d d d d d d d d d d d d d b 
+            . b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b . 
+            `)
+    } else if (num == 31) {
+        zSprite_boost_charge_bar.setImage(img`
+            . b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b . 
+            b 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 d d d d d d d d d d d d d d d d d d d d b 
+            b 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 d d d d d d d d d d d d d d d d d d d d b 
+            . b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b . 
+            `)
+    } else if (num == 30) {
+        zSprite_boost_charge_bar.setImage(img`
+            . b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b . 
+            b 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 d d d d d d d d d d d d d d d d d d d d d b 
+            b 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 d d d d d d d d d d d d d d d d d d d d d b 
+            . b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b . 
+            `)
+    } else if (num == 29) {
+        zSprite_boost_charge_bar.setImage(img`
+            . b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b . 
+            b 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 d d d d d d d d d d d d d d d d d d d d d d b 
+            b 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 d d d d d d d d d d d d d d d d d d d d d d b 
+            . b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b . 
+            `)
+    } else if (num == 28) {
+        zSprite_boost_charge_bar.setImage(img`
+            . b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b . 
+            b 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 d d d d d d d d d d d d d d d d d d d d d d d b 
+            b 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 d d d d d d d d d d d d d d d d d d d d d d d b 
+            . b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b . 
+            `)
+    } else if (num == 27) {
+        zSprite_boost_charge_bar.setImage(img`
+            . b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b . 
+            b 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 d d d d d d d d d d d d d d d d d d d d d d d d b 
+            b 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 d d d d d d d d d d d d d d d d d d d d d d d d b 
+            . b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b . 
+            `)
+    } else if (num == 26) {
+        zSprite_boost_charge_bar.setImage(img`
+            . b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b . 
+            b 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 d d d d d d d d d d d d d d d d d d d d d d d d d b 
+            b 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 d d d d d d d d d d d d d d d d d d d d d d d d d b 
+            . b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b . 
+            `)
+    } else if (num == 26) {
+        zSprite_boost_charge_bar.setImage(img`
+            . b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b . 
+            b 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 d d d d d d d d d d d d d d d d d d d d d d d d d d b 
+            b 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 d d d d d d d d d d d d d d d d d d d d d d d d d d b 
+            . b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b . 
+            `)
+    } else if (num == 25) {
+        zSprite_boost_charge_bar.setImage(img`
+            . b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b . 
+            b 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 d d d d d d d d d d d d d d d d d d d d d d d d d d d b 
+            b 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 d d d d d d d d d d d d d d d d d d d d d d d d d d d b 
             . b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b . 
             `)
     } else {
     	
     }
 }
+let xTrail = 0
+let maxSpeed = 0
+let speed = 0
 let boostCharge = 0
 let gameRunning = 0
+let zSprite_2: Sprite = null
+let zSprite_3: Sprite = null
 let colourChosen = 0
-let Sprite_boost_charge_bar: Sprite = null
-let Sprite_Blue: Sprite = null
-let Sprite_Purple: Sprite = null
-let Sprite_Red: Sprite = null
-let Sprite_Car: Sprite = null
-let Sprite_Cursor: Sprite = null
+let zSprite_boost_charge_bar: Sprite = null
+let zSprite_Blue: Sprite = null
+let zSprite_Purple: Sprite = null
+let zSprite_Red: Sprite = null
+let zSprite_Car: Sprite = null
+let zSprite_Cursor: Sprite = null
 setVariables()
 SetColour()
-controller.moveSprite(Sprite_Cursor, 0, 0)
-controller.moveSprite(Sprite_Car, 0, 100)
+controller.moveSprite(zSprite_Cursor, 0, 0)
+controller.moveSprite(zSprite_Car, 0, 100)
 tiles.setTilemap(tilemap`level1`)
-tiles.placeOnRandomTile(Sprite_Car, assets.tile`Start`)
-Sprite_Car.setStayInScreen(true)
-scene.cameraFollowSprite(Sprite_Car)
+tiles.placeOnRandomTile(zSprite_Car, assets.tile`Start`)
+zSprite_Car.setStayInScreen(true)
+scene.cameraFollowSprite(zSprite_Car)
 forever(function () {
     if (gameRunning == 1) {
-        Sprite_Car.x += 2
+        xTrail = zSprite_Car.x
+        speed += (maxSpeed - speed) / 50
+        zSprite_Car.x += speed
+        if (xTrail == zSprite_Car.x) {
+            speed = 0
+        }
         if (controller.A.isPressed() && boostCharge > 0) {
-            Sprite_Car.x += 1.5
+            zSprite_Car.x += 1.5
             boostCharge += -1.5
         }
+        if (boostCharge < 100) {
+            boostCharge += 0.1
+        }
+        if (boostCharge >= 100) {
+            boostCharge = 100
+        }
+        boostCharge = Math.round(boostCharge * 10) / 10
+        updateBoostBar(Math.round(boostCharge / 2))
+        zSprite_boost_charge_bar.setPosition(zSprite_Car.x - 50, zSprite_Car.y + 50)
     }
-    if (boostCharge < 100) {
-        boostCharge += 0.1
-    }
-    if (boostCharge >= 100) {
-        boostCharge = 100
-    }
-    boostCharge = Math.round(boostCharge * 10) / 10
-    updateBoostBar(Math.round(boostCharge / 2))
-    Sprite_boost_charge_bar.setPosition(Sprite_Car.x - 50, Sprite_Car.y + 50)
 })
