@@ -297,7 +297,16 @@ function SetColour () {
     zSprite_Purple.setFlag(SpriteFlag.Invisible, true)
     zSprite_Red.setFlag(SpriteFlag.Invisible, true)
     zSprite_Blue.setFlag(SpriteFlag.Invisible, true)
-    pause(1000)
+}
+function setVariables () {
+    gameRunning = 0
+    colourChosen = 0
+    boostCharge = 100
+    speed = 0
+    maxSpeed = 2.5
+}
+function countdown () {
+    pause(200)
     zSprite_3 = sprites.create(img`
         . . . . . . . . . . . . . . . . 
         . . . 2 2 2 2 2 2 2 2 2 . . . . 
@@ -315,7 +324,7 @@ function SetColour () {
         . . . 2 a a a a a a a a 2 . . . 
         . . 2 a a a a a a a a a 2 . . . 
         . . . 2 2 2 2 2 2 2 2 2 . . . . 
-        `, SpriteKind.Player)
+        `, SpriteKind.Object)
     zSprite_3.setPosition(80, 60)
     pause(1000)
     zSprite_3.setFlag(SpriteFlag.Invisible, true)
@@ -336,56 +345,100 @@ function SetColour () {
         . . 2 a a a a a a a a a 2 . . . 
         . . 2 a a a a a a a a a 2 . . . 
         . . . 2 2 2 2 2 2 2 2 2 . . . . 
-        `, SpriteKind.Player)
+        `, SpriteKind.Object)
     zSprite_2.setPosition(80, 60)
     pause(1000)
     zSprite_2.setFlag(SpriteFlag.Invisible, true)
-    zSprite_2 = sprites.create(img`
+    zSprite_1 = sprites.create(img`
         . . . . . . . . . . . . . . . . 
-        . . . 2 2 2 2 2 2 2 . . . . . . 
-        . . 2 a a a a a a a 2 . . . . . 
-        . . 2 a a a a a a a a 2 . . . . 
-        . . . 2 2 2 2 2 2 a a a 2 . . . 
-        . . . . . . . . . 2 a a 2 . . . 
-        . . . . . . . . 2 a a a 2 . . . 
-        . . . . . . . 2 a a a a 2 . . . 
-        . . . . . . 2 a a a a 2 . . . . 
-        . . . . . 2 a a a a 2 . . . . . 
-        . . . . 2 a a a a 2 . . . . . . 
-        . . . 2 a a a a 2 . . . . . . . 
-        . . 2 a a a a 2 2 2 2 2 . . . . 
-        . . 2 a a a a a a a a a 2 . . . 
-        . . 2 a a a a a a a a a 2 . . . 
-        . . . 2 2 2 2 2 2 2 2 2 . . . . 
-        `, SpriteKind.Player)
-    zSprite_3 = sprites.create(img`
-        . . . . . . . . . . . . . . . . 
-        . . . 2 2 2 2 2 2 2 2 2 . . . . 
-        . . 2 a a a a a a a a a 2 . . . 
-        . . . 2 a a a a a a a a 2 . . . 
-        . . . . 2 2 2 2 2 2 a a 2 . . . 
-        . . . . . . . . . 2 a a 2 . . . 
-        . . . . . . . 2 2 2 a a 2 . . . 
-        . . . . . . 2 a a a a a 2 . . . 
-        . . . . . 2 a a a a a a 2 . . . 
-        . . . . . . 2 a a a a a 2 . . . 
-        . . . . . . . 2 2 2 a a 2 . . . 
-        . . . . . . . . . 2 a a 2 . . . 
-        . . . . 2 2 2 2 2 2 a a 2 . . . 
-        . . . 2 a a a a a a a a 2 . . . 
-        . . 2 a a a a a a a a a 2 . . . 
-        . . . 2 2 2 2 2 2 2 2 2 . . . . 
-        `, SpriteKind.Player)
-    gameRunning = 1
-    zSprite_Car.setFlag(SpriteFlag.Invisible, false)
-    zSprite_boost_charge_bar.setFlag(SpriteFlag.Invisible, false)
-}
-function setVariables () {
-    gameRunning = 0
-    colourChosen = 0
-    boostCharge = 100
-    speed = 0
-    maxSpeed = 3
+        . . . . . . 2 2 . . . . . . . . 
+        . . . . . 2 a a 2 . . . . . . . 
+        . . . . . 2 a a 2 . . . . . . . 
+        . . . . . 2 a a 2 . . . . . . . 
+        . . . . . 2 a a 2 . . . . . . . 
+        . . . . . 2 a a 2 . . . . . . . 
+        . . . . . 2 a a 2 . . . . . . . 
+        . . . . . 2 a a 2 . . . . . . . 
+        . . . . . 2 a a 2 . . . . . . . 
+        . . . . . 2 a a 2 . . . . . . . 
+        . . . . . 2 a a 2 . . . . . . . 
+        . . . . . 2 a a 2 . . . . . . . 
+        . . . . . 2 a a 2 . . . . . . . 
+        . . . . . 2 a a 2 . . . . . . . 
+        . . . . . . 2 2 . . . . . . . . 
+        `, SpriteKind.Object)
+    zSprite_1.setPosition(80, 60)
+    pause(1000)
+    zSprite_1.setFlag(SpriteFlag.Invisible, true)
+    zSprite_Go = sprites.create(img`
+        ...2222222222222222...............2222222222222222.............222......
+        ..222222222222222222.............222222222222222222...........22222.....
+        .222aaaaaaaaaaaaaa222...........222aaaaaaaaaaaaaa222..........22222.....
+        222aa222222222222aa222.........222aa222222222222aa222.........22a22.....
+        22aa22222222222222aa22.........22aa22222222222222aa22.........22a22.....
+        22a222..........222a22.........22a222..........222a22.........22a22.....
+        22a22............22a22.........22a22............22a22.........22a22.....
+        22a22............22a22.........22a22............22a22.........22a22.....
+        22a22............22222.........22a22............22a22.........22a22.....
+        22a22.............222..........22a22............22a22.........22a22.....
+        22a22..........................22a22............22a22.........22a22.....
+        22a22..........................22a22............22a22.........22a22.....
+        22a22..........................22a22............22a22.........22a22.....
+        22a22..........................22a22............22a22.........22a22.....
+        22a22..........................22a22............22a22.........22a22.....
+        22a22..........................22a22............22a22.........22a22.....
+        22a22..........................22a22............22a22.........22a22.....
+        22a22..........................22a22............22a22.........22a22.....
+        22a22..........................22a22............22a22.........22a22.....
+        22a22..........................22a22............22a22.........22a22.....
+        22a22..........................22a22............22a22.........22a22.....
+        22a22..........................22a22............22a22.........22a22.....
+        22a22..........................22a22............22a22.........22a22.....
+        22a22..........................22a22............22a22.........22a22.....
+        22a22..........................22a22............22a22.........22a22.....
+        22a22..........................22a22............22a22.........22a22.....
+        22a22..........................22a22............22a22.........22a22.....
+        22a22..........................22a22............22a22.........22a22.....
+        22a22..........................22a22............22a22.........22a22.....
+        22a22..........................22a22............22a22.........22a22.....
+        22a22..........................22a22............22a22.........22a22.....
+        22a22....22222222222...........22a22............22a22.........22a22.....
+        22a22...2222222222222..........22a22............22a22.........22a22.....
+        22a22...22aaaaaaaaa222.........22a22............22a22.........22a22.....
+        22a22...2222222222aa22.........22a22............22a22.........22a22.....
+        22a22....2222222222a22.........22a22............22a22.........22a22.....
+        22a22...........222a22.........22a22............22a22.........22a22.....
+        22a22............22a22.........22a22............22a22.........22a22.....
+        22a22............22a22.........22a22............22a22.........22a22.....
+        22a22............22a22.........22a22............22a22.........22a22.....
+        22a22............22a22.........22a22............22a22.........22a22.....
+        22a22............22a22.........22a22............22a22.........22a22.....
+        22a22............22a22.........22a22............22a22.........22a22.....
+        22a22............22a22.........22a22............22a22.........22a22.....
+        22a22............22a22.........22a22............22a22.........22a22.....
+        22a22............22a22.........22a22............22a22.........22a22.....
+        22a22............22a22.........22a22............22a22.........22a22.....
+        22a22............22a22.........22a22............22a22.........22a22.....
+        22a22............22a22.........22a22............22a22.........22a22.....
+        22a22............22a22.........22a22............22a22.........22a22.....
+        22a22............22a22.........22a22............22a22.........22a22.....
+        22a22............22a22.........22a22............22a22.........22a22.....
+        22a22............22a22.........22a22............22a22.........22a22.....
+        22a22............22a22.........22a22............22a22.........22a22.....
+        22a22............22a22.........22a22............22a22.........22a22.....
+        22a22............22a22.........22a22............22a22.........22222.....
+        22a22............22a22.........22a22............22a22.........22222.....
+        22a22............22a22.........22a22............22a22..........222......
+        22a222..........222a22.........22a222..........222a22...................
+        22aa22222222222222aa22.........22aa22222222222222aa22..........222......
+        222aa222222222222aa222.........222aa222222222222aa222.........22222.....
+        .222aaaaaaaaaaaaaa222...........222aaaaaaaaaaaaaa222..........22a22.....
+        ..222222222222222222.............222222222222222222...........22222.....
+        ...2222222222222222...............2222222222222222.............222......
+        `, SpriteKind.Object)
+    zSprite_Go.setPosition(80, 60)
+    pause(1000)
+    zSprite_Go.setFlag(SpriteFlag.Invisible, true)
 }
 function updateBoostBar (num: number) {
     if (num == 50) {
@@ -577,26 +630,191 @@ function updateBoostBar (num: number) {
             b 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 d d d d d d d d d d d d d d d d d d d d d d d d d d d b 
             . b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b . 
             `)
+    } else if (num == 24) {
+        zSprite_boost_charge_bar.setImage(img`
+            . b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b . 
+            b 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 d d d d d d d d d d d d d d d d d d d d d d d d d d d d b 
+            b 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 d d d d d d d d d d d d d d d d d d d d d d d d d d d d b 
+            . b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b . 
+            `)
+    } else if (num == 23) {
+        zSprite_boost_charge_bar.setImage(img`
+            . b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b . 
+            b 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 d d d d d d d d d d d d d d d d d d d d d d d d d d d d d b 
+            b 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 d d d d d d d d d d d d d d d d d d d d d d d d d d d d d b 
+            . b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b . 
+            `)
+    } else if (num == 22) {
+        zSprite_boost_charge_bar.setImage(img`
+            . b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b . 
+            b 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d b 
+            b 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d b 
+            . b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b . 
+            `)
+    } else if (num == 21) {
+        zSprite_boost_charge_bar.setImage(img`
+            . b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b . 
+            b 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d b 
+            b 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d b 
+            . b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b . 
+            `)
+    } else if (num == 20) {
+        zSprite_boost_charge_bar.setImage(img`
+            . b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b . 
+            b 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d b 
+            b 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d b 
+            . b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b . 
+            `)
+    } else if (num == 19) {
+        zSprite_boost_charge_bar.setImage(img`
+            . b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b . 
+            b 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d b 
+            b 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d b 
+            . b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b . 
+            `)
+    } else if (num == 18) {
+        zSprite_boost_charge_bar.setImage(img`
+            . b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b . 
+            b 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d b 
+            b 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d b 
+            . b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b . 
+            `)
+    } else if (num == 17) {
+        zSprite_boost_charge_bar.setImage(img`
+            . b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b . 
+            b 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d b 
+            b 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d b 
+            . b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b . 
+            `)
+    } else if (num == 16) {
+        zSprite_boost_charge_bar.setImage(img`
+            . b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b . 
+            b 6 6 6 6 6 6 6 6 6 6 6 6 6 6 d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d b 
+            b 6 6 6 6 6 6 6 6 6 6 6 6 6 6 d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d b 
+            . b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b . 
+            `)
+    } else if (num == 15) {
+        zSprite_boost_charge_bar.setImage(img`
+            . b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b . 
+            b 6 6 6 6 6 6 6 6 6 6 6 6 6 d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d b 
+            b 6 6 6 6 6 6 6 6 6 6 6 6 6 d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d b 
+            . b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b . 
+            `)
+    } else if (num == 14) {
+        zSprite_boost_charge_bar.setImage(img`
+            . b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b . 
+            b 6 6 6 6 6 6 6 6 6 6 6 6 d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d b 
+            b 6 6 6 6 6 6 6 6 6 6 6 6 d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d b 
+            . b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b . 
+            `)
+    } else if (num == 13) {
+        zSprite_boost_charge_bar.setImage(img`
+            . b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b . 
+            b 6 6 6 6 6 6 6 6 6 6 6 d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d b 
+            b 6 6 6 6 6 6 6 6 6 6 6 d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d b 
+            . b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b . 
+            `)
+    } else if (num == 12) {
+        zSprite_boost_charge_bar.setImage(img`
+            . b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b . 
+            b 6 6 6 6 6 6 6 6 6 6 d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d b 
+            b 6 6 6 6 6 6 6 6 6 6 d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d b 
+            . b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b . 
+            `)
+    } else if (num == 11) {
+        zSprite_boost_charge_bar.setImage(img`
+            . b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b . 
+            b 6 6 6 6 6 6 6 6 6 d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d b 
+            b 6 6 6 6 6 6 6 6 6 d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d b 
+            . b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b . 
+            `)
+    } else if (num == 10) {
+        zSprite_boost_charge_bar.setImage(img`
+            . b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b . 
+            b 6 6 6 6 6 6 6 6 d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d b 
+            b 6 6 6 6 6 6 6 6 d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d b 
+            . b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b . 
+            `)
+    } else if (num == 9) {
+        zSprite_boost_charge_bar.setImage(img`
+            . b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b . 
+            b 6 6 6 6 6 6 6 d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d b 
+            b 6 6 6 6 6 6 6 d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d b 
+            . b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b . 
+            `)
+    } else if (num == 8) {
+        zSprite_boost_charge_bar.setImage(img`
+            . b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b . 
+            b 6 6 6 6 6 6 d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d b 
+            b 6 6 6 6 6 6 d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d b 
+            . b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b . 
+            `)
+    } else if (num == 7) {
+        zSprite_boost_charge_bar.setImage(img`
+            . b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b . 
+            b 6 6 6 6 6 d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d b 
+            b 6 6 6 6 6 d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d b 
+            . b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b . 
+            `)
+    } else if (num == 6) {
+        zSprite_boost_charge_bar.setImage(img`
+            . b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b . 
+            b 6 6 6 6 d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d b 
+            b 6 6 6 6 d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d b 
+            . b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b . 
+            `)
+    } else if (num == 5) {
+        zSprite_boost_charge_bar.setImage(img`
+            . b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b . 
+            b 6 6 6 d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d b 
+            b 6 6 6 d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d b 
+            . b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b . 
+            `)
+    } else if (num == 4) {
+        zSprite_boost_charge_bar.setImage(img`
+            . b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b . 
+            b 6 6 d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d b 
+            b 6 6 d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d b 
+            . b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b . 
+            `)
+    } else if (num == 3) {
+        zSprite_boost_charge_bar.setImage(img`
+            . b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b . 
+            b 6 d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d b 
+            b 6 d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d b 
+            . b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b . 
+            `)
     } else {
-    	
+        zSprite_boost_charge_bar.setImage(img`
+            . b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b . 
+            b d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d b 
+            b d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d d b 
+            . b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b . 
+            `)
     }
 }
 let xTrail = 0
+let zSprite_Go: Sprite = null
+let zSprite_1: Sprite = null
+let zSprite_2: Sprite = null
+let zSprite_3: Sprite = null
 let maxSpeed = 0
 let speed = 0
 let boostCharge = 0
-let gameRunning = 0
-let zSprite_2: Sprite = null
-let zSprite_3: Sprite = null
 let colourChosen = 0
-let zSprite_boost_charge_bar: Sprite = null
 let zSprite_Blue: Sprite = null
 let zSprite_Purple: Sprite = null
 let zSprite_Red: Sprite = null
-let zSprite_Car: Sprite = null
 let zSprite_Cursor: Sprite = null
+let zSprite_boost_charge_bar: Sprite = null
+let zSprite_Car: Sprite = null
+let gameRunning = 0
 setVariables()
 SetColour()
+countdown()
+gameRunning = 1
+zSprite_Car.setFlag(SpriteFlag.Invisible, false)
+zSprite_boost_charge_bar.setFlag(SpriteFlag.Invisible, false)
 controller.moveSprite(zSprite_Cursor, 0, 0)
 controller.moveSprite(zSprite_Car, 0, 100)
 tiles.setTilemap(tilemap`level1`)
@@ -612,7 +830,7 @@ forever(function () {
             speed = 0
         }
         if (controller.A.isPressed() && boostCharge > 0) {
-            zSprite_Car.x += 1.5
+            zSprite_Car.x += 2
             boostCharge += -1.5
         }
         if (boostCharge < 100) {
