@@ -2,7 +2,7 @@
 class SpriteKind:
     Object = SpriteKind.create()
 def SetColour():
-    global zSprite_Red, zSprite_Purple, zSprite_Blue, zSprite_Cursor, zSprite_Car, zSprite_boost_charge_bar, colourChosen, zSprite_3, zSprite_2, zSprite_1, zSprite_Go, gameRunning
+    global zSprite_Red, zSprite_Purple, zSprite_Blue, zSprite_Cursor, zSprite_Car, zSprite_boost_charge_bar, colourChosen
     scene.set_background_image(img("""
         ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
                 ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
@@ -302,6 +302,15 @@ def SetColour():
     zSprite_Purple.set_flag(SpriteFlag.INVISIBLE, True)
     zSprite_Red.set_flag(SpriteFlag.INVISIBLE, True)
     zSprite_Blue.set_flag(SpriteFlag.INVISIBLE, True)
+def setVariables():
+    global gameRunning, colourChosen, boostCharge, speed, maxSpeed
+    gameRunning = 0
+    colourChosen = 0
+    boostCharge = 100
+    speed = 0
+    maxSpeed = 2.5
+def countdown():
+    global zSprite_3, zSprite_2, zSprite_1, zSprite_Go
     pause(200)
     zSprite_3 = sprites.create(img("""
             . . . . . . . . . . . . . . . . 
@@ -437,18 +446,8 @@ def SetColour():
         """),
         SpriteKind.Object)
     zSprite_Go.set_position(80, 60)
-    pause(1000)
+    pause(500)
     zSprite_Go.set_flag(SpriteFlag.INVISIBLE, True)
-    gameRunning = 1
-    zSprite_Car.set_flag(SpriteFlag.INVISIBLE, False)
-    zSprite_boost_charge_bar.set_flag(SpriteFlag.INVISIBLE, False)
-def setVariables():
-    global gameRunning, colourChosen, boostCharge, speed, maxSpeed
-    gameRunning = 0
-    colourChosen = 0
-    boostCharge = 100
-    speed = 0
-    maxSpeed = 2.5
 def updateBoostBar(num: number):
     if num == 50:
         zSprite_boost_charge_bar.set_image(img("""
@@ -801,31 +800,37 @@ def updateBoostBar(num: number):
                         . b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b .
         """))
 xTrail = 0
-maxSpeed = 0
-speed = 0
-boostCharge = 0
-gameRunning = 0
 zSprite_Go: Sprite = None
 zSprite_1: Sprite = None
 zSprite_2: Sprite = None
 zSprite_3: Sprite = None
+maxSpeed = 0
+speed = 0
+boostCharge = 0
 colourChosen = 0
-zSprite_boost_charge_bar: Sprite = None
 zSprite_Blue: Sprite = None
 zSprite_Purple: Sprite = None
 zSprite_Red: Sprite = None
-zSprite_Car: Sprite = None
+zSprite_boost_charge_bar: Sprite = None
 zSprite_Cursor: Sprite = None
+zSprite_Car: Sprite = None
+gameRunning = 0
 setVariables()
 SetColour()
+countdown()
+gameRunning = 1
+zSprite_Car.set_flag(SpriteFlag.INVISIBLE, False)
 controller.move_sprite(zSprite_Cursor, 0, 0)
 controller.move_sprite(zSprite_Car, 0, 100)
-tiles.set_tilemap(tilemap("""level1"""))
+tiles.set_tilemap(tilemap("""
+    level1
+"""))
 tiles.place_on_random_tile(zSprite_Car, assets.tile("""
     Start
 """))
 zSprite_Car.set_stay_in_screen(True)
 scene.camera_follow_sprite(zSprite_Car)
+zSprite_boost_charge_bar.set_flag(SpriteFlag.INVISIBLE, False)
 
 def on_forever():
     global xTrail, speed, boostCharge
@@ -835,9 +840,9 @@ def on_forever():
         zSprite_Car.x += speed
         if xTrail == zSprite_Car.x:
             speed = 0
-        if controller.A.is_pressed() and boostCharge > 0:
+        if controller.A.is_pressed() and boostCharge > 4:
             zSprite_Car.x += 2
-            boostCharge += -1.5
+            boostCharge += -1
         if boostCharge < 100:
             boostCharge += 0.1
         if boostCharge >= 100:

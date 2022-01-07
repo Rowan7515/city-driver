@@ -304,6 +304,7 @@ function setVariables () {
     boostCharge = 100
     speed = 0
     maxSpeed = 2.5
+    finish = 0
 }
 function countdown () {
     pause(200)
@@ -437,8 +438,15 @@ function countdown () {
         ...2222222222222222...............2222222222222222.............222......
         `, SpriteKind.Object)
     zSprite_Go.setPosition(80, 60)
-    pause(1000)
+    pause(500)
     zSprite_Go.setFlag(SpriteFlag.Invisible, true)
+}
+function timer () {
+    let time = 0
+    while (!(finish == 1)) {
+    	
+    }
+    return time
 }
 function updateBoostBar (num: number) {
     if (num == 50) {
@@ -798,6 +806,7 @@ let zSprite_Go: Sprite = null
 let zSprite_1: Sprite = null
 let zSprite_2: Sprite = null
 let zSprite_3: Sprite = null
+let finish = 0
 let maxSpeed = 0
 let speed = 0
 let boostCharge = 0
@@ -805,8 +814,8 @@ let colourChosen = 0
 let zSprite_Blue: Sprite = null
 let zSprite_Purple: Sprite = null
 let zSprite_Red: Sprite = null
-let zSprite_Cursor: Sprite = null
 let zSprite_boost_charge_bar: Sprite = null
+let zSprite_Cursor: Sprite = null
 let zSprite_Car: Sprite = null
 let gameRunning = 0
 setVariables()
@@ -814,13 +823,14 @@ SetColour()
 countdown()
 gameRunning = 1
 zSprite_Car.setFlag(SpriteFlag.Invisible, false)
-zSprite_boost_charge_bar.setFlag(SpriteFlag.Invisible, false)
 controller.moveSprite(zSprite_Cursor, 0, 0)
 controller.moveSprite(zSprite_Car, 0, 100)
 tiles.setTilemap(tilemap`level1`)
-tiles.placeOnRandomTile(zSprite_Car, assets.tile`Start`)
+tiles.placeOnRandomTile(zSprite_Car, assets.tile`Start0`)
 zSprite_Car.setStayInScreen(true)
 scene.cameraFollowSprite(zSprite_Car)
+zSprite_boost_charge_bar.setFlag(SpriteFlag.Invisible, false)
+let score = timer()
 forever(function () {
     if (gameRunning == 1) {
         xTrail = zSprite_Car.x
@@ -829,9 +839,9 @@ forever(function () {
         if (xTrail == zSprite_Car.x) {
             speed = 0
         }
-        if (controller.A.isPressed() && boostCharge > 0) {
+        if (controller.A.isPressed() && boostCharge > 4) {
             zSprite_Car.x += 2
-            boostCharge += -1.5
+            boostCharge += -1
         }
         if (boostCharge < 100) {
             boostCharge += 0.1
@@ -842,5 +852,8 @@ forever(function () {
         boostCharge = Math.round(boostCharge * 10) / 10
         updateBoostBar(Math.round(boostCharge / 2))
         zSprite_boost_charge_bar.setPosition(zSprite_Car.x - 50, zSprite_Car.y + 50)
+        if (zSprite_Car.tileKindAt(TileDirection.Center, assets.tile`Start0`)) {
+            finish = 1
+        }
     }
 })
