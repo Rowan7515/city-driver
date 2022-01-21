@@ -92,7 +92,7 @@ function setVariables () {
     gameRunning = 0
     colourChosen = 0
     boostCharge = 100
-    speed = 0
+    speed = 0.2
     maxSpeed = 2.5
     finish = 0
 }
@@ -591,19 +591,19 @@ function updateBoostBar (num: number) {
             `)
     }
 }
+let xTrail = 0
 let time = 0
 let zSprite_Go: Sprite = null
 let zSprite_1: Sprite = null
 let zSprite_2: Sprite = null
 let zSprite_3: Sprite = null
+let finish = 0
+let maxSpeed = 0
+let boostCharge = 0
 let colour = ""
 let colourChosen = 0
-let finish = 0
-let boostCharge = 0
-let maxSpeed = 0
-let speed = 0
-let xTrail = 0
 let gameRunning = 0
+let speed = 0
 let zSprite_Car: Sprite = null
 let zSprite_boost_charge_bar: Sprite = null
 setVariables()
@@ -616,42 +616,38 @@ zSprite_boost_charge_bar = sprites.create(img`
     . b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b . 
     `, SpriteKind.Object)
 zSprite_Car.setFlag(SpriteFlag.Invisible, false)
-gameRunning = 1
-controller.moveSprite(zSprite_Car, 0, 100)
+controller.moveSprite(zSprite_Car, speed, 100)
 tiles.setTilemap(tilemap`level1`)
 tiles.placeOnRandomTile(zSprite_Car, assets.tile`Start0`)
 zSprite_Car.setStayInScreen(true)
 scene.cameraFollowSprite(zSprite_Car)
+gameRunning = 1
 let score = timer()
-while (gameRunning == 1) {
-    xTrail = zSprite_Car.x
-    speed += (maxSpeed - speed) / 50
-    zSprite_Car.x += speed
-    if (xTrail == zSprite_Car.x) {
-        speed = 0
-    }
-    if (controller.A.isPressed() && boostCharge > 4) {
-        zSprite_Car.x += 2
-        boostCharge += -1
-    }
-    if (boostCharge < 100) {
-        boostCharge += 0.1
-    }
-    if (boostCharge >= 100) {
-        boostCharge = 100
-    }
-    boostCharge = Math.round(boostCharge * 10) / 10
-    updateBoostBar(Math.round(boostCharge / 2))
-    zSprite_boost_charge_bar.setPosition(zSprite_Car.x - 50, zSprite_Car.y + 50)
-    if (zSprite_Car.tileKindAt(TileDirection.Center, assets.tile`Start0`)) {
-        finish = 1
-    }
-}
 gameRunning = 0
 game.splash(score)
 forever(function () {
-    music.playMelody("C C D C C C E C ", 282)
-    music.playMelody("D D E D D D F D ", 282)
-    music.playMelody("C C D C C C E C ", 282)
-    music.playMelody("G G F F E E D D ", 282)
+    if (gameRunning == 1) {
+        xTrail = zSprite_Car.x
+        speed += (maxSpeed - speed) / 50
+        zSprite_Car.x += speed
+        if (xTrail == zSprite_Car.x) {
+            speed = 0
+        }
+        if (controller.A.isPressed() && boostCharge > 4) {
+            zSprite_Car.x += 2
+            boostCharge += -1
+        }
+        if (boostCharge < 100) {
+            boostCharge += 0.1
+        }
+        if (boostCharge >= 100) {
+            boostCharge = 100
+        }
+        boostCharge = Math.round(boostCharge * 10) / 10
+        updateBoostBar(Math.round(boostCharge / 2))
+        zSprite_boost_charge_bar.setPosition(zSprite_Car.x - 50, zSprite_Car.y + 50)
+        if (zSprite_Car.tileKindAt(TileDirection.Center, assets.tile`Finish`)) {
+            finish = 1
+        }
+    }
 })
