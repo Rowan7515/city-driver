@@ -89,12 +89,14 @@ function SetColour () {
     }
 }
 function setVariables () {
-    gameRunning = 0
+    gameRunning = 1
     colourChosen = 0
     boostCharge = 100
     speed = 0.2
     maxSpeed = 2.5
     finish = 0
+    highScore = 0
+    score = 0
 }
 function countdown () {
     pause(200)
@@ -232,7 +234,7 @@ function countdown () {
     zSprite_Go.setFlag(SpriteFlag.Invisible, true)
 }
 function timer () {
-    while (!(finish == 1)) {
+    while (gameRunning == 1) {
         time += 0.1
         pause(100)
     }
@@ -599,11 +601,13 @@ let zSprite_2: Sprite = null
 let zSprite_3: Sprite = null
 let finish = 0
 let maxSpeed = 0
+let speed = 0
 let boostCharge = 0
 let colour = ""
 let colourChosen = 0
+let highScore = 0
+let score = 0
 let gameRunning = 0
-let speed = 0
 let zSprite_Car: Sprite = null
 let zSprite_boost_charge_bar: Sprite = null
 setVariables()
@@ -616,15 +620,18 @@ zSprite_boost_charge_bar = sprites.create(img`
     . b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b . 
     `, SpriteKind.Object)
 zSprite_Car.setFlag(SpriteFlag.Invisible, false)
-controller.moveSprite(zSprite_Car, speed, 100)
+controller.moveSprite(zSprite_Car, 0, 100)
 tiles.setTilemap(tilemap`level1`)
 tiles.placeOnRandomTile(zSprite_Car, assets.tile`Start0`)
 zSprite_Car.setStayInScreen(true)
 scene.cameraFollowSprite(zSprite_Car)
 gameRunning = 1
-let score = timer()
-gameRunning = 0
-game.splash(score)
+score = timer()
+if (score > highScore) {
+    highScore = score
+}
+game.splash("Score: ", score)
+game.splash("Highscore: ", highScore)
 forever(function () {
     if (gameRunning == 1) {
         xTrail = zSprite_Car.x
@@ -647,7 +654,8 @@ forever(function () {
         updateBoostBar(Math.round(boostCharge / 2))
         zSprite_boost_charge_bar.setPosition(zSprite_Car.x - 50, zSprite_Car.y + 50)
         if (zSprite_Car.tileKindAt(TileDirection.Center, assets.tile`Finish`)) {
-            finish = 1
+            gameRunning = 0
         }
+        zSprite_Car.sayText(time)
     }
 })
