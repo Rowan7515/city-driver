@@ -97,6 +97,9 @@ function setVariables () {
     finish = 0
     highScore = 0
     score = 0
+    timeStart = 0
+    timeEnd = 0
+    time = 0
 }
 function countdown () {
     pause(200)
@@ -232,13 +235,6 @@ function countdown () {
     zSprite_Go.setPosition(80, 60)
     pause(500)
     zSprite_Go.setFlag(SpriteFlag.Invisible, true)
-}
-function timer () {
-    while (gameRunning == 1) {
-        time += 0.1
-        pause(100)
-    }
-    return time
 }
 function updateBoostBar (num: number) {
     if (num == 50) {
@@ -594,20 +590,22 @@ function updateBoostBar (num: number) {
     }
 }
 let xTrail = 0
-let time = 0
 let zSprite_Go: Sprite = null
 let zSprite_1: Sprite = null
 let zSprite_2: Sprite = null
 let zSprite_3: Sprite = null
 let finish = 0
 let maxSpeed = 0
-let speed = 0
 let boostCharge = 0
 let colour = ""
 let colourChosen = 0
 let highScore = 0
+let timeEnd = 0
 let score = 0
+let timeStart = 0
 let gameRunning = 0
+let time = 0
+let speed = 0
 let zSprite_Car: Sprite = null
 let zSprite_boost_charge_bar: Sprite = null
 setVariables()
@@ -620,13 +618,15 @@ zSprite_boost_charge_bar = sprites.create(img`
     . b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b b . 
     `, SpriteKind.Object)
 zSprite_Car.setFlag(SpriteFlag.Invisible, false)
-controller.moveSprite(zSprite_Car, 0, 100)
+controller.moveSprite(zSprite_Car, speed, 100)
 tiles.setTilemap(tilemap`level1`)
 tiles.placeOnRandomTile(zSprite_Car, assets.tile`Start0`)
 zSprite_Car.setStayInScreen(true)
 scene.cameraFollowSprite(zSprite_Car)
+let zSprite_Time = textsprite.create(convertToText(time), 1, 15)
 gameRunning = 1
-score = timer()
+timeStart = time
+score = timeEnd - timeStart
 if (score > highScore) {
     highScore = score
 }
@@ -653,9 +653,15 @@ forever(function () {
         boostCharge = Math.round(boostCharge * 10) / 10
         updateBoostBar(Math.round(boostCharge / 2))
         zSprite_boost_charge_bar.setPosition(zSprite_Car.x - 50, zSprite_Car.y + 50)
+        zSprite_Time.setPosition(zSprite_Car.x + 50, zSprite_Car.y + 50)
         if (zSprite_Car.tileKindAt(TileDirection.Center, assets.tile`Finish`)) {
             gameRunning = 0
+            timeEnd = time
         }
-        zSprite_Car.sayText(time)
     }
+})
+forever(function () {
+    time += 0.1
+    time = Math.round(time * 100) / 100
+    pause(100)
 })
