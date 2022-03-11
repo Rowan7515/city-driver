@@ -640,7 +640,7 @@ forever(function () {
         }
         if (controller.A.isPressed() && boostCharge > 4) {
             speed = maxSpeed + 50
-            boostCharge += -2
+            boostCharge += -1
         }
         if (boostCharge < 100) {
             boostCharge += 0.1
